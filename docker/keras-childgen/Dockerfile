@@ -12,4 +12,4 @@ EXPOSE 5000
 RUN mkdir -p upload
 RUN mkdir -p conv
 #run
-CMD [ "python", "colorize.py" ]
+CMD [ "python", "autoencoder.py" ]
