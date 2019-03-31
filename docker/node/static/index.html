@@ -99,17 +99,18 @@
     </div>
   </footer>
   <style>
-  @media   screen and (min-width: 301px){
+  @media   screen and (min-width: 901px){
   .vertical-center {
   margin: 0;
   position: fixed;
   top: 50%;
-  -ms-transform: translateY(-50%);
+    top: 50%;
+  transform: translateY(-50%);
  
   transform: translateX(50%);
   }
       }
-  @media   screen and (max-width: 300px){
+  @media   screen and (max-width: 900px){
   .vertical-center {
   margin: 0;
   position: fixed;
@@ -270,9 +271,9 @@ $('.my-pond').filepond('allowMultiple', false);
     let filters =""
     for(fil = 0; fil<6 ; fil++){
       filters +=`<div class="header col s12 light">
-                      <h5 class="header col s12 light">Generated Filter ${fil+1}</h5>
+                      <h5 class="header col s12 light">Generated From Weight ${fil+1}</h5>
                         <img class="img_result" src="${filter[fil+1]}" style="    max-width: 50px; max-height: 50px;"  alt="Generated"><br>
-                        <h6 class="col s12 light">Batch of ${batchof[i+1]}</h5>
+                        <h6 class="col s12 light">(Batch_n of ${batchof[fil]})</h5>
                     </div>
               `
     }
@@ -295,7 +296,7 @@ $('.my-pond').filepond('allowMultiple', false);
               `</div>
               <div class="header col s4 light  ">
                   <div class="vertical-center s12 ">
-                    <h5 class="header col s12 light">Merged Children</h5>
+                    <h5 class="header col s12 light">Children</h5>
                     <canvas class=" s4 img_result"  id="canvas"  style="    max-width: 150px; max-height: 150px;" alt="original">
                     <h6 class="col s12 light">Final Image</h5>
                   </div>
@@ -306,29 +307,35 @@ $('.my-pond').filepond('allowMultiple', false);
         setTimeout(function(){
           let canvas = document.getElementById('canvas');
           
-          var context = canvas.getContext('2d');
-          var img1 = new Image();
-          var img2 = new Image();
-          var img3 = new Image();
-          var img4 = new Image();
+          let context = canvas.getContext('2d');
+          let img1 =new Image();
+          img2 =new Image();
+          img3 =new Image();
+          img4=new Image();
+          img5 = new Image();
 
           img1.src = url1;
-          img2.src = filter[7];
-          img3.src = filter[6];
-          img4.src = filter[5];
+          img2.src = filter[6];
+          img3.src = filter[5];
+          img4.src = filter[4];
+          img5.src = filter[3];
           canvas.width= img1.width
           canvas.height = img1.height
       
-          context.globalAlpha = 0.7;
-          context.drawImage(img1,0,0);
+          //context.globalAlpha = 0.7;
+          //context.drawImage(img1,0,0);
         
 
-          context.globalAlpha = 0.7;  
-          context.drawImage(img2,0,0);
-          context.globalAlpha = 0.7;  
+
+          context.globalAlpha = 0.5;  
           context.drawImage(img3,0,0);
-          context.globalAlpha = 0.7;  
+          context.globalAlpha = 0.5;  
           context.drawImage(img4,0,0);
+          context.globalAlpha = 0.5;  
+          context.drawImage(img5,0,0);
+          context.globalAlpha = 0.8;  
+          context.drawImage(img2,0,0);
+ 
 
 }, 500);
   

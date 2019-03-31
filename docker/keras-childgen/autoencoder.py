@@ -3,8 +3,10 @@ from werkzeug.datastructures import ImmutableMultiDict
 import os,sys
 app = Flask(__name__)
 from werkzeug import secure_filename
-
-
+from imutils import face_utils
+import imutils
+import dlib
+import cv2
 ## Keras
 import scipy
 import matplotlib.pyplot as plt
@@ -26,7 +28,9 @@ postProcess.load_weights('./models/sharpen_weights1.h5')
  
 global graph 
 graph = tf.get_default_graph()
-
+p = "shape_predictor_68_face_landmarks.dat"
+detector = dlib.get_frontal_face_detector()
+predictor = dlib.shape_predictor(p)
 
 def imread(path):
         return scipy.misc.imfilter(scipy.misc.imfilter(scipy.misc.imread(path, mode='RGB').astype(np.float),ftype='smooth_more'),ftype='smooth')
@@ -63,8 +67,22 @@ def gen():
             file.save(os.path.join(app.config['upload'], filename))
             img= cv2.imread(os.path.join(app.config['upload'], filename))
             height, width,alp = img.shape
-            #print (height, width,alp)
             im =imprep(os.path.join(app.config['upload'], filename))
+
+            #print (height, width,alp)
+
+            #Draw rec
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+            rects = detector(gray,1)
+            print(rects)
+            for (i, rect) in enumerate(rects):
+                # array
+                shape = predictor(gray, rect)
+                shape = face_utils.shape_to_np(shape)
+                (x, y, w, h) = face_utils.rect_to_bb(rect)
+                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                cv2.imwrite(os.path.join(app.config['upload'], filename),img)
         generated_b = []
         for i in range(7):
                 autodencoder.load_weights('./models/autoencoder_weights%s.h5'% (i+1))
