@@ -1,0 +1,19 @@
+{
+  "name": "keras-node-svc",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Tachid Boonpipat <bo.tachid_st@tni.ac.th>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "croppie": "^2.6.2",
+    "express": "^4.16.4",
+    "materialize-css": "^1.0.0-rc.2",
+    "multer": "^1.4.1",
+    "request": "^2.88.0",
+    "rx-dom": "^7.0.3"
+  }
+}

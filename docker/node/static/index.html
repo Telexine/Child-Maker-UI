@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Child generator</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/croppie.css" />
+  <link rel="stylesheet" href="static/css/animate.css" />
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-wrapper deep-purple darken-3">
+      <a href="/" class="brand-logo"><i style="padding-left:5px" class="material-icons">face</i>Child generator</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/"><i class="material-icons">refresh</i></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container con1">
+        <input type="file" class="filepond scale-transition scale-out">
+      <div id="Panel">
+      <br><br>
+      <h1 class="header center purple-text">Let's AI do it for You</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">By utilizing power of Machine Learning</h5>
+      </div>
+      <div class="row center">
+         <a id="upload-button" class="btn-large waves-effect waves-light green">Upload</a>
+      </div>
+      <br><br>
+    </div>
+    
+    </div>
+  </div>
+
+
+  <div class="container con2">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Speeds up development</h5>
+
+            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">User Experience Focused</h5>
+
+            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Easy to work with</h5>
+
+            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+  </div>
+
+  <footer class="page-footer deep-purple darken-3">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <img  src="static/git.png" style="border: black 2px;border-radius: 200px;max-width: 250px;width: 25%">
+          <h5 class="white-text">Source / <a class="orange-text text-lighten-3" href="https://github.com/Telexine">Telexine</a></h5>
+          <a  syle=""href="https://github.com/Telexine/colorizeSketch" class="grey-text text-lighten-4"><i class="material-icons">more_horiz</i>colorizeSketch Machine Learning Project </a><br>
+          <a  syle=""href="https://github.com/Telexine/KubeKeras" class="grey-text text-lighten-4"><i class="material-icons">more_horiz</i>Kubernates Keras (This Project)</a>  <img style="border: beige 2px"src="https://camo.githubusercontent.com/a93e5fee7f9d907dffdc58fd6851dac1de13f028/68747470733a2f2f7472617669732d63692e6f72672f54656c6578696e652f4b7562654b657261732e7376673f6272616e63683d6d6173746572" alt="Build Status" data-canonical-src="https://travis-ci.org/Telexine/KubeKeras.svg?branch=master" style="max-width:100%;"><br>
+          <a  syle=""href="https://hub.docker.com/r/telexine/" class="grey-text text-lighten-4"><i class="material-icons">more_horiz</i>DockerHub Repository</a>
+         
+        </div>
+      
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      createdby <a class="orange-text text-lighten-3" href="">Tachid Boonpipat</a>
+      </div>
+    </div>
+  </footer>
+  <style>
+  
+  .progress{margin: 0.5rem 0 1rem 0;} 
+  .container{
+    width:100%!important;
+    margin:0!important;
+    padding: 0!important;
+    max-width: 100%!important;
+              }
+  body{ 
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    }
+  .img_result{width:100%;max-width: 250px}
+
+
+  </style>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="static/js/croppie.js"></script>
+  <script src="node_modules/rx/dist/rx.lite.js"></script> 
+  <script src="node_modules/rx-dom/dist/rx.dom.js"></script> 
+
+  <!-- Load FilePond library -->
+  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+  <!-- Turn all file input elements into ponds -->
+ 
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+
+  <script>
+      FilePond.parse(document.body);
+ 
+      FilePond.setOptions({
+          allowImageResize: true,
+          imagePreviewMinHeight : 150,
+          imageResizeTargetWidth: 300,
+          server: {
+            process:(fieldName, file, metadata, load, error, progress, abort) => {
+
+
+            // fieldName is the name of the input field
+            // file is the actual file object to send
+            const formData = new FormData();
+            formData.append("image", file, file.name);
+
+            const request = new XMLHttpRequest();
+            request.open('POST', '/upload');
+
+            request.upload.onprogress = (e) => {
+                progress(e.lengthComputable, e.loaded, e.total);
+                
+            };
+
+            request.onload = function() {
+                if (request.status >= 200 && request.status < 300) {
+                    // the load method accepts either a string (id) or an object
+                    load(request.responseText);
+                    console.log(request.responseText); // uploads/xxx.jpeg
+                    let imgUrl = request.responseText
+                    //generate 
+                    let xhr = new XMLHttpRequest();
+                    
+                    xhr.open('POST', '/result');
+                     
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function() {//Call a function when the state changes.
+                        if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                            // success
+                            console.log(this.responseText) ///upload/dd0b27b2afac41852513ed38e7071e89.png,conv/color-dd0b27b2afac41852513ed38e7071e89.png
+                            img = this.responseText.split(",")
+                            clearall() 
+                            openResult(img[0],img[1])
+                          }
+                    }
+                    
+                    xhr.send("filepath="+imgUrl)
+                }
+                else {
+                    // Can call the error method if something is wrong, should exit after
+                    error('oh no');
+                }
+            };
+            
+            request.send(formData);
+            
+              
+            request.onloadend = function(){
+                    // load Animation 
+                    $('.con1').removeClass('scale-in').addClass(' scale-transition    scale-out');
+                    $('#navbar').append(`<div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                          `)
+                    $('#index-banner').css("padding-top","0").addClass(' scale-transition    scale-out');
+                    $('.con1').remove();
+                    $('.con2').remove();
+                    $('.footer-copyright').css("height","50em")
+
+            }
+            // Should expose an abort method so the request can be cancelled
+            return {
+                abort: () => {
+                    // This function is entered if the user has tapped the cancel button
+                    request.abort();
+
+                    // Let FilePond know the request has been cancelled
+                    abort();
+                }
+            };
+          }
+      }
+  });
+   
+
+
+
+  $("#upload-button").bind({   click: function() {
+    $('#Panel').addClass(' scale-transition scale-out');
+    $('.filepond').addClass(' scale-in');
+    $('.con2').addClass(' scale-transition scale-out')
+ 
+  }});
+  $(function(){
+
+// Turn input element into a pond
+$('.my-pond').filepond();
+$('.my-pond').filepond('allowMultiple', false);
+  // Turn input element into a pond
+  $('.my-pond').on('FilePond:addfile', function(e) {
+        console.log('file added event', e);
+    });
+ 
+  
+  });
+  
+  
+ let clearall = function(){this.$('footer').remove();this.$('.container').remove();this.$('.progress').remove()}
+ let openResult = function(url1,url2){
+
+    $('body').append(`<div class="container  " >  <div class="section no-pad-bot" id="index-banner">
+        <div class="container con1 animate fadeIn ">
+          
+          <div id="Panel">
+    
+          <div class="row center">
+            <div class="header col s4 light">
+              <h5 class="header col s12 light">Face </h5>
+                <img class="img_result" src="${url1}"  style="    max-width: 250px; max-height: 250px;" alt="original">
+                <h6 class="col s12 light">parent</h5>
+              </div>
+              <div class="header col s4 light">
+              <h5 class="header col s12 light">Generated Filter</h5>
+                <img class="img_result" src="${url2}" style="    max-width: 250px; max-height: 250px;"  alt="Generated"><br>
+                <h6 class="col s12 light">Children</h5>
+              </div>
+              <div class="header col s4 light  ">
+                  <h5 class="header col s12 light">Merged</h5>
+               <canvas id="canvas"  class="img_result"  style="max-width: 500px; max-height: 500px;"></canvas>
+                  <h6 class="col s12 light">Final Image</h5>
+              </div>
+          </div>
+          </div> 
+        </div>`)
+        setTimeout(function(){
+          let canvas = document.getElementById('canvas');
+          
+          var context = canvas.getContext('2d');
+          var img1 = new Image();
+          var img2 = new Image();
+          img1.src = url1;
+          img2.src = url2;
+          canvas.width= img1.width
+          canvas.height = img1.height
+          console.log(img1)
+          context.globalAlpha = 1.0;
+          context.drawImage(img1,0,0);
+        
+
+          context.globalAlpha = 0.7;  
+          context.drawImage(img2,0,0);
+
+}, 500);
+  
+ }
+  
+  </script>
+  </body>
+</html>
