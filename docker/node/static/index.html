@@ -99,7 +99,23 @@
     </div>
   </footer>
   <style>
-  
+  @media   screen and (min-width: 301px){
+  .vertical-center {
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+ 
+  transform: translateX(50%);
+  }
+      }
+  @media   screen and (max-width: 300px){
+  .vertical-center {
+  margin: 0;
+  position: fixed;
+  top: 50%;
+ 
+  }}
   .progress{margin: 0.5rem 0 1rem 0;} 
   .container{
     width:100%!important;
@@ -237,9 +253,29 @@ $('.my-pond').filepond('allowMultiple', false);
   
   });
   
-  
+  Array.prototype.swap = function (x,y) {
+    var b = this[x];
+    this[x] = this[y];
+    this[y] = b;
+    return this;
+}
  let clearall = function(){this.$('footer').remove();this.$('.container').remove();this.$('.progress').remove()}
  let openResult = function(url1,url2){
+    let batchof = ["0","18","54","90","117","126"]
+    filter = Array(7)
+    filter.fill(url2).forEach(function(part, i) { 
+      filter[i] = filter[i].replace("child6",`child${i}`);
+    });
+ 
+    let filters =""
+    for(fil = 0; fil<6 ; fil++){
+      filters +=`<div class="header col s12 light">
+                      <h5 class="header col s12 light">Generated Filter ${fil+1}</h5>
+                        <img class="img_result" src="${filter[fil+1]}" style="    max-width: 50px; max-height: 50px;"  alt="Generated"><br>
+                        <h6 class="col s12 light">Batch of ${batchof[i+1]}</h5>
+                    </div>
+              `
+    }
 
     $('body').append(`<div class="container  " >  <div class="section no-pad-bot" id="index-banner">
         <div class="container con1 animate fadeIn ">
@@ -248,19 +284,21 @@ $('.my-pond').filepond('allowMultiple', false);
     
           <div class="row center">
             <div class="header col s4 light">
-              <h5 class="header col s12 light">Face </h5>
-                <img class="img_result" src="${url1}"  style="    max-width: 250px; max-height: 250px;" alt="original">
-                <h6 class="col s12 light">parent</h5>
+              <div class="vertical-center s12 ">
+                <h5 class="header col s12 light">Face </h5>
+                  <img class=" s4 img_result" src="${url1}"  style="    max-width: 150px; max-height: 150px;" alt="original">
+                  <h6 class="col s12 light">parent</h5>
+                </div>
               </div>
               <div class="header col s4 light">
-              <h5 class="header col s12 light">Generated Filter</h5>
-                <img class="img_result" src="${url2}" style="    max-width: 250px; max-height: 250px;"  alt="Generated"><br>
-                <h6 class="col s12 light">Children</h5>
-              </div>
+              `+filters+
+              `</div>
               <div class="header col s4 light  ">
-                  <h5 class="header col s12 light">Merged</h5>
-               <canvas id="canvas"  class="img_result"  style="max-width: 250px; max-height: 500px;"></canvas>
-                  <h6 class="col s12 light">Final Image</h5>
+                  <div class="vertical-center s12 ">
+                    <h5 class="header col s12 light">Merged Children</h5>
+                    <canvas class=" s4 img_result"  id="canvas"  style="    max-width: 150px; max-height: 150px;" alt="original">
+                    <h6 class="col s12 light">Final Image</h5>
+                  </div>
               </div>
           </div>
           </div> 
@@ -271,17 +309,26 @@ $('.my-pond').filepond('allowMultiple', false);
           var context = canvas.getContext('2d');
           var img1 = new Image();
           var img2 = new Image();
+          var img3 = new Image();
+          var img4 = new Image();
+
           img1.src = url1;
-          img2.src = url2;
+          img2.src = filter[7];
+          img3.src = filter[6];
+          img4.src = filter[5];
           canvas.width= img1.width
           canvas.height = img1.height
-          console.log(img1)
-          context.globalAlpha = 1.0;
+      
+          context.globalAlpha = 0.7;
           context.drawImage(img1,0,0);
         
 
           context.globalAlpha = 0.7;  
           context.drawImage(img2,0,0);
+          context.globalAlpha = 0.7;  
+          context.drawImage(img3,0,0);
+          context.globalAlpha = 0.7;  
+          context.drawImage(img4,0,0);
 
 }, 500);
   

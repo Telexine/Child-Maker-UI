@@ -47,6 +47,7 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 _IP = "http://localhost:5000/"
 app.config['upload'] = os.path.join("upload")
 app.config['decoded']  = os.path.join("decoded")
+ 
 @app.route('/')
 def hello():
     return 'Hello Container World!'
@@ -64,28 +65,30 @@ def gen():
             height, width,alp = img.shape
             #print (height, width,alp)
             im =imprep(os.path.join(app.config['upload'], filename))
+        generated_b = []
+        for i in range(7):
+                autodencoder.load_weights('./models/autoencoder_weights%s.h5'% (i+1))
+                print(i)
+                with graph.as_default():
+                        
+                        # Encode to feature
+                        child1 = autodencoder.predict(im)
+        
+        
+                        child1 =scipy.misc.imresize( np.concatenate(child1),(height,width))
 
- 
-        with graph.as_default():
-                
-                # Encode to feature
-                child1 = autodencoder.predict(im)
- 
- 
-                child1 =scipy.misc.imresize( np.concatenate(child1),(height,width))
-
-                child1 = imprep2(child1)
-                child1 = postProcess.predict(child1)
-                child1 =scipy.misc.imresize( np.concatenate(child1),(height,width))
-                
-                scipy.misc.imsave( "./decoded/child-"+file.filename,  child1)
-                img = Image.open( "./decoded/child-"+file.filename)
-                '''
-                converter =   ImageEnhance.Sharpness(img)
-                out = converter.enhance(1.1)
-                '''
-                img.save("./decoded/child-"+file.filename)
-                return _IP+"upload/"+file.filename+','+_IP+'decoded/child-'+file.filename
+                        child1 = imprep2(child1)
+                        child1 = postProcess.predict(child1)
+                        child1 =scipy.misc.imresize( np.concatenate(child1),(height,width))
+                        
+                        scipy.misc.imsave( "./decoded/child-"+file.filename,  child1)
+                        img = Image.open( "./decoded/child-"+file.filename)
+                        if i == 6:
+                                converter =   ImageEnhance.Sharpness(img)
+                                out = converter.enhance(1.1)
+                        
+                        img.save("./decoded/child"+str(i)+"-"+file.filename)
+        return _IP+"upload/"+file.filename+','+_IP+'decoded/child'+str(i)+'-'+file.filename
 
         return 'Error'
 
