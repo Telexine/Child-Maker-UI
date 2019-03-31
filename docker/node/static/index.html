@@ -11,6 +11,8 @@
   <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
   <link rel="stylesheet" href="static/css/croppie.css" />
   <link rel="stylesheet" href="static/css/animate.css" />
+
+
 </head>
 <body>
 
@@ -99,6 +101,14 @@
     </div>
   </footer>
   <style>
+  .zoom {
+ 
+  transition: transform .2s; /* Animation */
+ 
+  }  
+  .zoom:hover {
+  transform: scale(3.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
   @media   screen and (min-width: 901px){
   .vertical-center {
   margin: 0;
@@ -147,7 +157,7 @@
   <!-- Turn all file input elements into ponds -->
  
 <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-
+<script src="static/js/jointer.min.js"></script>
   <script>
       FilePond.parse(document.body);
  
@@ -271,8 +281,8 @@ $('.my-pond').filepond('allowMultiple', false);
     let filters =""
     for(fil = 0; fil<6 ; fil++){
       filters +=`<div class="header col s12 light">
-                      <h5 class="header col s12 light">Generated From Weight ${fil+1}</h5>
-                        <img class="img_result" src="${filter[fil+1]}" style="    max-width: 50px; max-height: 50px;"  alt="Generated"><br>
+                      <h5 class="header  col s12 light">Generated From Weight ${fil+1}</h5>
+                        <img id="node_${fil+1}" class="img_result  zoom" src="${filter[fil+1]}" style="    max-width: 50px; max-height: 50px;"  alt="Generated"><br>
                         <h6 class="col s12 light">(Batch_n of ${batchof[fil]})</h5>
                     </div>
               `
@@ -287,7 +297,7 @@ $('.my-pond').filepond('allowMultiple', false);
             <div class="header col s4 light">
               <div class="vertical-center s12 ">
                 <h5 class="header col s12 light">Face </h5>
-                  <img class=" s4 img_result" src="${url1}"  style="    max-width: 150px; max-height: 150px;" alt="original">
+                  <img id="in" class=" s4 img_result  " src="${url1}"  style="    max-width: 150px; max-height: 150px;" alt="original">
                   <h6 class="col s12 light">parent</h5>
                 </div>
               </div>
@@ -297,7 +307,7 @@ $('.my-pond').filepond('allowMultiple', false);
               <div class="header col s4 light  ">
                   <div class="vertical-center s12 ">
                     <h5 class="header col s12 light">Children</h5>
-                    <canvas class=" s4 img_result"  id="canvas"  style="    max-width: 150px; max-height: 150px;" alt="original">
+                    <canvas class=" s4 img_result  "  id="canvas"  style="    max-width: 150px; max-height: 150px;" alt="original">
                     <h6 class="col s12 light">Final Image</h5>
                   </div>
               </div>
@@ -336,6 +346,7 @@ $('.my-pond').filepond('allowMultiple', false);
           context.globalAlpha = 0.8;  
           context.drawImage(img2,0,0);
  
+
 
 }, 500);
   
