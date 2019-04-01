@@ -1,0 +1,62 @@
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "childgen-web"
+  namespace: "default"
+  labels:
+    app: "childgen-web"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "childgen-web"
+  template:
+    metadata:
+      labels:
+        app: "childgen-web"
+    spec:
+      containers:
+      - name: "childgen-web"
+        image: "telexine/keras-node-childgen:latest"
+---
+apiVersion: "autoscaling/v1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "childgen-web"
+  namespace: "default"
+  labels:
+    app: "childgen-web"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "childgen-web"
+    apiVersion: "apps/v1beta1"
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: childgen-web
+  name: childgen-web
+  namespace: default
+  resourceVersion: "2591"
+  selfLink: /api/v1/namespaces/default/services/childgen-web
+spec:
+  clusterIP: 10.96.0.25
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30174
+    port: 80
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: childgen-web
+  sessionAffinity: None
+  type: LoadBalancer
