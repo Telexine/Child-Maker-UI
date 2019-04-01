@@ -23,6 +23,6 @@ ADD . /usr/src/app
 EXPOSE 5000
 #make folder
 RUN mkdir -p upload
-RUN mkdir -p conv
+RUN mkdir -p decoded
 #run
 CMD [ "python", "autoencoder.py" ]
