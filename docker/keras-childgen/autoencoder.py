@@ -9,7 +9,6 @@ import dlib
 import cv2
 ## Keras
 import scipy
-import matplotlib.pyplot as plt
 from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from keras.models import Sequential, load_model
 import scipy
