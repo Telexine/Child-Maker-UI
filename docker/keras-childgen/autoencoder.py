@@ -24,7 +24,7 @@ autodencoder = load_model('./models/autoencoder_model.h5')
 autodencoder.load_weights('./models/autoencoder_weights1.h5')
  
 postProcess = load_model('./models/sharpen_model.h5')
-postProcess.load_weights('./models/sharpen_weights1.h5')
+postProcess.load_weights('./models/sharpen_weights.h5')
  
 global graph 
 graph = tf.get_default_graph()
@@ -84,7 +84,7 @@ def gen():
                 cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
                 cv2.imwrite(os.path.join(app.config['upload'], filename),img)
         generated_b = []
-        for i in range(7):
+        for i in range(8):
                 autodencoder.load_weights('./models/autoencoder_weights%s.h5'% (i+1))
                 print(i)
                 with graph.as_default():
@@ -105,7 +105,7 @@ def gen():
                                 converter =   ImageEnhance.Sharpness(img)
                                 out = converter.enhance(1.1)
                         
-                        img.save("./decoded/child"+str(i)+"-"+file.filename)
+                        img.save("./decoded/child"+str(i+1)+"-"+file.filename)
         return _IP+"upload/"+file.filename+','+_IP+'decoded/child'+str(i)+'-'+file.filename
 
         return 'Error'

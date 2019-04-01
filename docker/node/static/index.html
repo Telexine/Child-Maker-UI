@@ -109,7 +109,7 @@
   .zoom:hover {
   transform: scale(3.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
-  @media   screen and (min-width: 901px){
+  @media   screen and (min-width: 1110px){
   .vertical-center {
   margin: 0;
   position: fixed;
@@ -120,7 +120,7 @@
   transform: translateX(50%);
   }
       }
-  @media   screen and (max-width: 900px){
+  @media   screen and (max-width: 1100px){
   .vertical-center {
   margin: 0;
   position: fixed;
@@ -272,22 +272,28 @@ $('.my-pond').filepond('allowMultiple', false);
 }
  let clearall = function(){this.$('footer').remove();this.$('.container').remove();this.$('.progress').remove()}
  let openResult = function(url1,url2){
-    let batchof = ["0","18","54","90","117","126"]
-    filter = Array(7)
+    let batchof = ["0","9","18","54","90","117","128","192"]
+    filter = Array(batchof.length)
     filter.fill(url2).forEach(function(part, i) { 
-      filter[i] = filter[i].replace("child6",`child${i}`);
+      filter[i] = filter[i].replace("child7",`child${i+1}`);
+      console.log(filter[i])
     });
  
     let filters =""
-    for(fil = 0; fil<6 ; fil++){
+    for(fil = 0; fil<filter.length ; fil++){
       filters +=`<div class="header col s12 light">
                       <h5 class="header  col s12 light">Generated From Weight ${fil+1}</h5>
-                        <img id="node_${fil+1}" class="img_result  zoom" src="${filter[fil+1]}" style="    max-width: 50px; max-height: 50px;"  alt="Generated"><br>
+                        <img id="node_${fil+1}" class="img_result  zoom" src="${filter[fil]}" style="    max-width: 50px; max-height: 50px;"  alt="Generated"><br>
                         <h6 class="col s12 light">(Batch_n of ${batchof[fil]})</h5>
                     </div>
               `
     }
-
+    filters +=`<div class="header col s12 light">
+                      <h5 class="header  col s12 light">How Model Training</h5>
+                        <img  class="img_result   " src="/static/train.gif" style="    max-width:500px; max-height: 500px;"  alt="Generated"><br>
+                        <h6 class="col s12 light">From 200 batch by 3000 faces</h5>
+                    </div>
+              `
     $('body').append(`<div class="container  " >  <div class="section no-pad-bot" id="index-banner">
         <div class="container con1 animate fadeIn ">
           
@@ -323,12 +329,15 @@ $('.my-pond').filepond('allowMultiple', false);
           img3 =new Image();
           img4=new Image();
           img5 = new Image();
-
+          img6 = new Image();
+          
           img1.src = url1;
-          img2.src = filter[6];
+          
+          img2.src = filter[4];
           img3.src = filter[5];
-          img4.src = filter[4];
-          img5.src = filter[3];
+          img4.src = filter[6];
+          img5.src = filter[7];
+          img6.src = filter[8];
           canvas.width= img1.width
           canvas.height = img1.height
       
@@ -337,15 +346,16 @@ $('.my-pond').filepond('allowMultiple', false);
         
 
 
-          context.globalAlpha = 0.5;  
-          context.drawImage(img3,0,0);
-          context.globalAlpha = 0.5;  
-          context.drawImage(img4,0,0);
-          context.globalAlpha = 0.5;  
-          context.drawImage(img5,0,0);
           context.globalAlpha = 0.8;  
           context.drawImage(img2,0,0);
- 
+          context.globalAlpha = 0.8;  
+          context.drawImage(img3,0,0);
+          context.globalAlpha = 0.8;  
+          context.drawImage(img4,0,0);
+          context.globalAlpha = 0.8;  
+          context.drawImage(img5,0,0);
+          context.globalAlpha = 0.8;  
+          context.drawImage(img6,0,0);
 
 
 }, 500);
