@@ -35,9 +35,9 @@ app.post('/result',(req,res) =>{
 
   let img  
 
-  let backendIngressIP = "http://childgen-python.default.svc.cluster.local:5000/"
-  //let backendIngressIP = "http://localhost:5000/"
-  request.post({url: backendIngressIP+'gen', formData: formData}, function(err, httpResponse, body) {
+  let backendsvcname = "http://childgen-python.default.svc.cluster.local:5000/"
+  //let backendsvcname = "http://localhost:5000/"
+  request.post({url: backendsvcname+'gen', formData: formData}, function(err, httpResponse, body) {
     if (err) {
       res.status(405).send(err);
       return console.error('upload failed:', err);
