@@ -15,7 +15,6 @@ RUN apt install python-pip -y
 ADD requirements.txt /usr/src/app/
 WORKDIR /usr/src/app
 RUN pip install -r requirements.txt 
-RUN pip install git+https://www.github.com/keras-team/keras-contrib.git
 RUN pip install numpy opencv-python dlib imutils
 #Copy current file to container folder
 ADD . /usr/src/app
