@@ -2,7 +2,11 @@
 ![img](https://github.com/Telexine/Child-Maker-UI/blob/master/s1.png)
 ![img](https://github.com/Telexine/Child-Maker-UI/blob/master/s3.png)
 ![img](https://github.com/Telexine/Child-Maker-UI/blob/master/s2.png)
-Child Maker - Generate Child from parent image with Docker
+
+#### _
+
+Child Maker - Generate Child from parent image with Docker 
+[![Build Status](https://travis-ci.org/Telexine/Child-Maker-UI.svg?branch=master)](https://travis-ci.org/Telexine/Child-Maker-UI)
 ================
 
 Simple autoencoder predictor  with simple front-end on dockerize/kube config 
