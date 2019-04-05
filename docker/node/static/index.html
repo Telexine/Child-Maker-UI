@@ -161,7 +161,7 @@
 <script src="static/js/jointer.min.js"></script>
   <script>
       FilePond.parse(document.body);
- 
+      // filepond setting  
       FilePond.setOptions({
           allowImageResize: true,
           imagePreviewMinHeight : 150,
@@ -187,7 +187,7 @@
                 if (request.status >= 200 && request.status < 300) {
                     // the load method accepts either a string (id) or an object
                     load(request.responseText);
-                    console.log(request.responseText); // uploads/xxx.jpeg
+ 
                     let imgUrl = request.responseText
                     //generate 
                     let xhr = new XMLHttpRequest();
@@ -271,17 +271,21 @@ $('.my-pond').filepond('allowMultiple', false);
     this[y] = b;
     return this;
 }
- let clearall = function(){this.$('footer').remove();this.$('.container').remove();this.$('.progress').remove()}
- let openResult = function(url1,url2){
-    let batchof = ["0","9","18","54","90","117","128","192"]
+ //clear UI
+let clearall = function(){this.$('footer').remove();this.$('.container').remove();this.$('.progress').remove()}
+
+// OpenResult get ori,result url and generate result page
+let openResult = function(original_url,result_url){
+    let batchof = ["0","9","18","54","90","117","128","192"] // batch no 
     filter = Array(batchof.length)
-    filter.fill(url2).forEach(function(part, i) { 
+    // get result 1 path and replace each to get all path store in array 
+    filter.fill(result_url).forEach(function(part, i) { 
       filter[i] = filter[i].replace("child7",`child${i+1}`);
-      console.log(filter[i])
     });
  
     let filters =""
     for(fil = 0; fil<filter.length ; fil++){
+    // middle box batch_ img
       filters +=`<div class="header col s12 light">
                       <h5 class="header  col s12 light">Generated From Weight ${fil+1}</h5>
                         <img id="node_${fil+1}" class="img_result  zoom" src="${filter[fil]}" style="    max-width: 50px; max-height: 50px;"  alt="Generated"><br>
@@ -289,12 +293,14 @@ $('.my-pond').filepond('allowMultiple', false);
                     </div>
               `
     }
+    // middle box last panel (gif)
     filters +=`<div class="header col s12 light">
                       <h5 class="header  col s12 light">How Model Training</h5>
                         <img  class="img_result   " src="/static/train.gif" style="    max-width:500px; max-height: 500px;"  alt="Generated"><br>
                         <h6 class="col s12 light">From 200 batch by 3000 faces</h5>
                     </div>
               `
+    // left and righ box
     $('body').append(`<div class="container  " >  <div class="section no-pad-bot" id="index-banner">
         <div class="container con1 animate fadeIn ">
           
@@ -304,7 +310,7 @@ $('.my-pond').filepond('allowMultiple', false);
             <div class="header col s4 light">
               <div class="vertical-center s12 ">
                 <h5 class="header col s12 light">Face </h5>
-                  <img id="in" class=" s4 img_result  " src="${url1}"  style="    max-width: 150px; max-height: 150px;" alt="original">
+                  <img id="in" class=" s4 img_result  " src="${original_url}"  style="    max-width: 150px; max-height: 150px;" alt="original">
                   <h6 class="col s12 light">parent</h5>
                 </div>
               </div>
@@ -322,6 +328,8 @@ $('.my-pond').filepond('allowMultiple', false);
           </div> 
         </div>`)
         setTimeout(function(){
+          //wait for .5 sec then load the final and paint on canvas
+
           let canvas = document.getElementById('canvas');
           
           let context = canvas.getContext('2d');
@@ -332,7 +340,7 @@ $('.my-pond').filepond('allowMultiple', false);
           img5 = new Image();
           img6 = new Image();
           
-          img1.src = url1;
+          img1.src = original_url;
           
           img2.src = filter[4];
           img3.src = filter[5];
@@ -342,11 +350,10 @@ $('.my-pond').filepond('allowMultiple', false);
           canvas.width= img1.width
           canvas.height = img1.height
       
-          //context.globalAlpha = 0.7;
-          //context.drawImage(img1,0,0);
+  
         
 
-
+          // merg alpha all layer
           context.globalAlpha = 0.8;  
           context.drawImage(img2,0,0);
           context.globalAlpha = 0.8;  

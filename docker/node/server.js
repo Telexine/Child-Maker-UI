@@ -22,74 +22,49 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/static/index.html'));
 });
 
+// use multer for multipart/form-data
 var upload = multer({ dest: 'uploads/' })
 
+//get result
 app.post('/result',(req,res) =>{
   let filepath = req.body.filepath ;
   console.log( req.body)
-
- 
   var formData = {
     file: fs.createReadStream(filepath)
   };
 
-  let img  
+  let img  // uploaded image
+  //For kubenetes
+  //backendsvcname = "http://childgen-python.default.svc.cluster.local:5000/"
+  //For local
+  let backendsvcname = "http://localhost:5000/"
 
-  let backendsvcname = "http://childgen-python.default.svc.cluster.local:5000/"
-  //let backendsvcname = "http://localhost:5000/"
+  //send file to python backend 
   request.post({url: backendsvcname+'gen', formData: formData}, function(err, httpResponse, body) {
     if (err) {
       res.status(405).send(err);
       return console.error('upload failed:', err);
     }
-    
+    // split orignal,result
     img = body.split(",")
     console.log(img)
     console.log('Upload successful!  Server responded with:', body);
     res.status(200).send(body);
-    ///upload/497e3f9a7b6bec86e51e1d0644ad55b2.jpeg,conv/color-497e3f9a7b6bec86e51e1d0644ad55b2.jpeg
-
   });
-  //res.status(200).send(img);
+ 
 
 });
-
+// upload function
 app.post('/upload',upload.single('image') ,(req, res,next) => {
- 
-
-
- 
+  //rename file
   let newfn = req.file.destination+req.file.filename+"."+req.file.mimetype.substr(req.file.mimetype.indexOf("/")+1,req.file.mimetype.length);
-  console.log(newfn)
   fs.rename(req.file.path,newfn, function (err) {
     if (err) throw err;
     fs.stat(newfn, function (err, stats) {
       if (err) throw err;
       console.log('stats: ' + JSON.stringify(stats));
-
  return res.status(200).send(newfn);
-
-
-
-  var formData = {
-    file: fs.createReadStream(newfn)
-  };
-  let img
-  request.post({url:'http://127.0.0.1:5000/gen', formData: formData}, function(err, httpResponse, body) {
-    if (err) {
-      return console.error('upload failed:', err);
-    }
-    console.log(body)
-    img = body.split(",")
-    
-    console.log('Upload successful!  Server responded with:', body);
-  });
-  res.status(200).send(img);
-  /*
-
-  });
-
-  */
+ 
   });
   });
 });

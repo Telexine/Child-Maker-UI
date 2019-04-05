@@ -1,0 +1,17 @@
+language: node_js
+
+sudo: required
+services:
+  - docker
+before_install:
+  - cd ./docker/keras-childgen
+install:
+  - docker build -t  keras-childgen .
+  - docker run -p 5000:5000 -d keras-childgen
+  - cd ..
+  - cd node
+  - docker build -t keras-node-childgen .
+  - docker run -p 8888:8888 -d   keras-node-childgen
+script:
+  - docker run -p 5000:5000 -d keras-childgen
+  - docker ps | grep  keras-childgen
