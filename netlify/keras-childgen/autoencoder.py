@@ -3,9 +3,6 @@ from werkzeug.datastructures import ImmutableMultiDict
 import os,sys
 app = Flask(__name__)
 from werkzeug import secure_filename
-from imutils import face_utils
-import imutils
-import dlib
 import cv2
 ## Keras
 import scipy
@@ -14,8 +11,7 @@ from keras.models import Sequential, load_model
 import scipy
 from PIL import Image,ImageEnhance
 import numpy as np
-from keras_contrib.layers.normalization.instancenormalization import InstanceNormalization
-##from keras_contrib.layers.normalization import InstanceNormalization
+
 import tensorflow as tf
 import cv2
 global model,prep
@@ -27,9 +23,7 @@ postProcess.load_weights('./models/sharpen_weights.h5')
  
 global graph 
 graph = tf.get_default_graph()
-p = "shape_predictor_68_face_landmarks.dat"
-detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(p)
+ 
 
 def imread(path):
         return scipy.misc.imfilter(scipy.misc.imfilter(scipy.misc.imread(path, mode='RGB').astype(np.float),ftype='smooth_more'),ftype='smooth')
@@ -82,19 +76,7 @@ def gen():
             height, width,alp = img.shape
             # prep file 
             im =imprep(os.path.join(app.config['upload'], filename))
-
-            #convert to grayscale for imutil model to detect face
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            rects = detector(gray,1)
-
-            #draw rectangle on face and replace original (original already loaded in np array )
-            for (i, rect) in enumerate(rects):
-                # array
-                shape = predictor(gray, rect)
-                shape = face_utils.shape_to_np(shape)
-                (x, y, w, h) = face_utils.rect_to_bb(rect)
-                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
-                cv2.imwrite(os.path.join(app.config['upload'], filename),img)
+ 
         ## loop predict from difference weight
         for i in range(8):
                 #load weight

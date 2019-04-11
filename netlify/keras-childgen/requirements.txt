@@ -4,5 +4,6 @@ matplotlib==2.2.2
 PILLOW==5.1.0
 tensorflow==1.8.0
 opencv-python
-imutils
-dlib
+Keras==2.2.4
+Keras-Applications==1.0.7
+Keras-Preprocessing==1.0.9
