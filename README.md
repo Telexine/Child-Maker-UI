@@ -75,7 +75,7 @@ access via
 http://localhost/
 ```
 
-## Setup native
+## Setup local version
 
 we need to edit hostname before run both script
 
